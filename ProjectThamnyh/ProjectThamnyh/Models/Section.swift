@@ -5,7 +5,7 @@
 //  Created by Ibrahim MOHAMMED on 15/02/2026.
 //
 
-import SwiftUI
+import Foundation
 
 struct Section: Decodable, Identifiable {
     let id = UUID()

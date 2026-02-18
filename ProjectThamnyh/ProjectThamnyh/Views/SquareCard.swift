@@ -11,7 +11,6 @@ import SwiftUI
 struct SquareCard: View {
     let item: ContentItem
     var big: Bool = false
-    var contentType: String = ""
     
     @StateObject private var audioPlayer = AudioPlayerManager.shared
     
@@ -43,7 +42,6 @@ struct SquareCard: View {
                 if hasAudio {
                     AudioPlayButton(
                         audioURL: item.audioURL,
-                        duration: item.duration,
                         audioPlayer: audioPlayer
                     )
                 }

@@ -5,7 +5,7 @@
 //  Created by Ibrahim MOHAMMED on 17/02/2026.
 //
 
-import SwiftUI
+import Foundation
 
 struct SearchSection: Decodable, Identifiable {
     let id = UUID()
@@ -33,36 +33,6 @@ struct SearchSection: Decodable, Identifiable {
             self.order = Int(orderString) ?? 0
         } else {
             self.order = 0
-        }
-    }
-    
-    func toSection() -> Section {
-        let contentItems = self.content.map { $0.toContentItem() }
-        
-        let tempData: [String: Any] = [
-            "name": self.name,
-            "type": self.type,
-            "content_type": self.content_type,
-            "order": self.order,
-            "content": contentItems.map { item in
-                return [
-                    "podcast_id": item.rawIdentifier,
-                    "name": item.name,
-                    "avatar_url": item.avatarURL?.absoluteString ?? "",
-                    "audio_url": item.audioURL ?? "",
-                    "duration": item.duration ?? 0
-                ] as [String : Any]
-            }
-        ]
-        
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: tempData)
-            let section = try JSONDecoder().decode(Section.self, from: jsonData)
-            return section
-        } catch {
-            print("Error converting SearchSection to Section: \(error)")
-
-            fatalError("Failed to convert SearchSection to Section")
         }
     }
 }

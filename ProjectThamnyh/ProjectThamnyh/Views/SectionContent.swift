@@ -17,7 +17,7 @@ struct SectionContent: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(section.content) { item in
-                        SquareCard(item: item, contentType: section.content_type)
+                        SquareCard(item: item)
                     }
                 }
             }
@@ -25,7 +25,7 @@ struct SectionContent: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(section.content) { item in
-                       SquareCard(item: item, contentType: section.content_type)
+                       SquareCard(item: item)
                     }
                 }
             }
@@ -33,7 +33,7 @@ struct SectionContent: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(section.content) { item in
-                        SquareCard(item: item, big: true, contentType: section.content_type)
+                        SquareCard(item: item, big: true)
                      
                     }
                 }

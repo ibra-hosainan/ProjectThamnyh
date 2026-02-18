@@ -35,7 +35,6 @@ struct QueueRow: View {
                 if item.audioURL != nil {
                     AudioPlayButton(
                         audioURL: item.audioURL,
-                        duration: item.duration,
                         audioPlayer: audioPlayer
                     )
                 }

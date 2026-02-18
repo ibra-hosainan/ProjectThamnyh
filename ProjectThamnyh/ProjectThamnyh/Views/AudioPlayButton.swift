@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AudioPlayButton: View {
     let audioURL: String?
-    let duration: Int?
     @ObservedObject var audioPlayer: AudioPlayerManager
     
     private var isCurrentlyPlaying: Bool {
@@ -93,9 +92,9 @@ struct AudioPlayButton: View {
 struct AudioPlayButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
-            AudioPlayButton(audioURL: "test", duration: 300, audioPlayer: AudioPlayerManager.shared)
-            AudioPlayButton(audioURL: "test", duration: 1800, audioPlayer: AudioPlayerManager.shared)
-            AudioPlayButton(audioURL: nil, duration: 0, audioPlayer: AudioPlayerManager.shared)
+            AudioPlayButton(audioURL: "test", audioPlayer: AudioPlayerManager.shared)
+            AudioPlayButton(audioURL: "test", audioPlayer: AudioPlayerManager.shared)
+            AudioPlayButton(audioURL: nil, audioPlayer: AudioPlayerManager.shared)
         }
         .padding()
         .background(Color.black)

@@ -5,7 +5,7 @@
 //  Created by Ibrahim MOHAMMED on 17/02/2026.
 //
 
-import SwiftUI
+import Foundation
 
 struct SearchContentItem: Decodable, Identifiable {
     let rawIdentifier: String
@@ -14,10 +14,6 @@ struct SearchContentItem: Decodable, Identifiable {
     let avatarURL: URL?
     let duration: Int?
     let episodeCount: Int?
-    let language: String?
-    let priority: String?
-    let popularityScore: String?
-    let score: String?
     
     private let uuid = UUID()
     var id: UUID { uuid }
@@ -29,10 +25,6 @@ struct SearchContentItem: Decodable, Identifiable {
         case avatar_url
         case duration
         case episode_count
-        case language
-        case priority
-        case popularityScore
-        case score
     }
     
     init(from decoder: Decoder) throws {
@@ -40,10 +32,6 @@ struct SearchContentItem: Decodable, Identifiable {
         
         self.name = try container.decode(String.self, forKey: .name)
         self.description = try? container.decode(String.self, forKey: .description)
-        self.language = try? container.decode(String.self, forKey: .language)
-        self.priority = try? container.decode(String.self, forKey: .priority)
-        self.popularityScore = try? container.decode(String.self, forKey: .popularityScore)
-        self.score = try? container.decode(String.self, forKey: .score)
         
         if let pid = try? container.decode(String.self, forKey: .podcast_id) {
             self.rawIdentifier = pid
@@ -72,30 +60,6 @@ struct SearchContentItem: Decodable, Identifiable {
             self.episodeCount = Int(countString)
         } else {
             self.episodeCount = nil
-        }
-    }
-    
-    func toContentItem() -> ContentItem {
-        var tempData: [String: Any] = [
-            "podcast_id": self.rawIdentifier,
-            "name": self.name
-        ]
-        
-        if let avatarURL = self.avatarURL?.absoluteString {
-            tempData["avatar_url"] = avatarURL
-        }
-        
-        if let duration = self.duration {
-            tempData["duration"] = duration
-        }
-        
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: tempData)
-            let contentItem = try JSONDecoder().decode(ContentItem.self, from: jsonData)
-            return contentItem
-        } catch {
-            print("Error converting SearchContentItem to ContentItem: \(error)")
-            fatalError("Failed to convert SearchContentItem to ContentItem")
         }
     }
 }

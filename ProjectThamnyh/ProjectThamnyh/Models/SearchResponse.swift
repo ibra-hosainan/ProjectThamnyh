@@ -5,7 +5,7 @@
 //  Created by Ibrahim MOHAMMED on 17/02/2026.
 //
 
-import SwiftUI
+import Foundation
 
 struct SearchResponse: Decodable {
     let sections: [SearchSection]

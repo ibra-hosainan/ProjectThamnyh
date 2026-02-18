@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
-    @StateObject private var audioPlayer = AudioPlayerManager.shared
     @Environment(\.dismiss) var dismiss
     @FocusState private var isSearchFieldFocused: Bool
     
@@ -70,20 +69,13 @@ struct SearchView: View {
                         loadingView
                     } else if let error = viewModel.errorMessage {
                         errorView(error: error)
-                    } else if viewModel.sections.isEmpty {
+                    } else if viewModel.searchResults.isEmpty {
                         noResultsView
                     } else {
                         searchResultsView
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
-                // Mini player at the bottom
-                if audioPlayer.currentAudioURL != nil {
-                    MiniPlayerView(audioPlayer: audioPlayer)
-                        .transition(.move(edge: .bottom))
-                        .animation(.easeInOut, value: audioPlayer.currentAudioURL)
-                }
             }
             .background(Color.black.ignoresSafeArea())
             .foregroundColor(.white)
@@ -181,7 +173,6 @@ struct SearchView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 16)
-            .padding(.bottom, audioPlayer.currentAudioURL != nil ? 70 : 0)
         }
     }
 }
